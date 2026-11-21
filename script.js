@@ -137,6 +137,12 @@
 
   /* ---------- setup ---------- */
   function init() {
+    // Logo is embedded in data.js, so no separate image file is needed.
+    var topLogo = document.querySelector(".topbar-logo");
+    if (topLogo) topLogo.src = window.KAU_LOGO;
+    var fav = document.querySelector('link[rel="icon"]');
+    if (fav) fav.href = window.KAU_LOGO;
+
     fillSelect(el.faculty, FACULTIES, function (f) { return f.id; }, function (f) { return f.name; });
     fillSelect(el.teacherFaculty, FACULTIES, function (f) { return f.id; }, function (f) { return f.name; });
     fillSelect(el.docType, window.DOC_TYPES, function (t) { return t; }, function (t) { return t; });
@@ -304,10 +310,9 @@
 
     var h = "";
     h += '<div class="rule top"></div>';
-    h += '<div class="main">';
 
     h += '<div class="head">';
-    h += '<img class="logo" src="assets/kau-logo.png" alt="" />';
+    h += '<img class="logo" src="' + window.KAU_LOGO + '" alt="" />';
     h += '<p class="uni">' + esc(INFO.name.toUpperCase()) + "</p>";
     h += '<p class="faculty-line">' + esc(fac.name) + "</p>";
     if (clean(v.department)) h += '<p class="dept-line">' + esc(v.department) + "</p>";
@@ -357,7 +362,6 @@
     h += '<div class="box by"><h3>Submitted By</h3><div class="body">' + by + "</div></div>";
     h += "</div>";
 
-    h += "</div>"; // .main
     h += '<div class="rule bottom"></div>';
     return h;
   }
